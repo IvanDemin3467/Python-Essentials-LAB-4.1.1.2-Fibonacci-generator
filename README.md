@@ -17,7 +17,7 @@ In other words:
 
 •	any other Fibonacci number is the sum of the two previous ones (e.g., Fib3 = 2, Fib4 = 3, Fib5 = 5, and so on)
 
-**Completed. The code includes:**
+**Completed. The code v1 uses direct iterator protocol implementation:**
 ```
 class Fib:
     def __init__(self, nn):
@@ -28,4 +28,25 @@ class Fib:
 
     def __next__(self):
         # the __next__ method is responsible for creating the sequence;
+```
+
+**The code v2 implements generator as it is**
+```
+def fibonacci(n):
+    # This is the Fibonacci number generator
+    p = pp = 1            # Initialize two previous Fib numbers
+    for i in range(n):    # Iterate to find next Fib numbers
+        if i in [0, 1]:   # First two Fib nubmers are equal to 1
+            yield 1       # Generate output
+        else:             # Staring from the third number the formula is:
+            n = p + pp    # Next number = previous number  + previous previous number 
+            pp, p = p, n  # Forget previous previous number . Store next and previous numbers
+            yield n       # Generate output
+
+
+# Main
+if __name__ == "__main__":
+    # make use of the gererator
+    fibs = list(fibonacci(10))
+    print(fibs)
 ```
